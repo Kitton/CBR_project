@@ -2,20 +2,15 @@ package CBR;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CBR_Main {
-
-	/**
-	 * @param args
-	 * @throws IOException 
-	 */
 	public static void main(String[] args) throws IOException {
-		readData("./data/pendigits_100.tes");
+		int n = readData("./data/pendigits_100.tes").size();
+		System.out.println(n + " cases were read");
 	}
 	
 	private static List<Case> readData(String filename) throws IOException{
@@ -27,7 +22,6 @@ public class CBR_Main {
 		String line = null;
 		List<Case> cases = new ArrayList<Case>(); 
 		while ((line = br.readLine()) != null) {
-			// reading lines until the end of the file
 			cases.add(parseCase(line));
 		}
 //		System.out.println(cases.get(10).getClassLabel());
