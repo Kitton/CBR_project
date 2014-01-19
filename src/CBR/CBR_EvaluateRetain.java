@@ -12,13 +12,13 @@ public class CBR_EvaluateRetain {
 	private double simThreshold;
 	private double simRemvThres;
 	private int kSimilar;
-	private double accuracy;
-	private double f1;
-	private double sensitivity;
+	
 	private ArrayList<Integer> trueP;
 	private ArrayList<Double> accuracies;
 	// First known label, second predicted label
 	private ArrayList<ArrayList<Integer>> labelPairs;
+	private ArrayList<Double> f1s;
+	private ArrayList<Double> sensitivities;
 	
 	public CBR_EvaluateRetain(String policy, CBR_Library database) {
 		this.policy = policy;
@@ -57,6 +57,14 @@ public class CBR_EvaluateRetain {
 		
 		return sum/this.trueP.size();
 		
+	}
+	
+	private double calcF1(){
+		return 0;
+	}
+	
+	private double calcSensitivity(){
+		return 0;
 	}
 	
 	// Interfaced evaluation
@@ -159,15 +167,15 @@ public class CBR_EvaluateRetain {
 	}
 
 	public double getAccuracy() {
-		return accuracy;
+		return this.accuracies.get(this.accuracies.size()-1);
 	}
 
 	public double getF1() {
-		return f1;
+		return this.f1s.get(this.f1s.size()-1);
 	}
 
 	public double getSensitivity() {
-		return sensitivity;
+		return this.sensitivities.get(this.sensitivities.size()-1);
 	}
 	
 	public ArrayList<Double> getAccuracies() {
