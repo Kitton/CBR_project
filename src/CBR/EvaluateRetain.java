@@ -68,7 +68,7 @@ public class EvaluateRetain {
 		else if (this.policy=="Similarity") {
 			// We only store good cases
 			List<Case> cases = this.database.retriveClosestCases(newCase);
-			kNN nearest = new kNN(this.kSimilar,this.database);
+			kNN nearest = new kNN(  this.database.retriveClosestCases(newCase),this.kSimilar );
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			
 			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
