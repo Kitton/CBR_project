@@ -9,6 +9,8 @@ public class CBR_Library {
 	private CaseTree caseTree;
 	private int treeSize;
 	private double[] attributesWeights;
+	private static final int MIN_CASE_NUMBER = 10;
+
 	
 	public CBR_Library(){
 		treeSize = -1;
@@ -31,7 +33,11 @@ public class CBR_Library {
 	}
 	
 	public List<Case> retriveClosestCases(Case inputCase){
-		return caseTree.getSimilarCases(inputCase);
+		List<Case> similars = caseTree.getSimilarCases(inputCase);
+		if (similars.size() <= MIN_CASE_NUMBER )
+			return getWholeList();
+		else
+			return similars;
 	}
 	
 	public void addCase(Case newCase){

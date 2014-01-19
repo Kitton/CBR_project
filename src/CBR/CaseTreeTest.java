@@ -49,5 +49,8 @@ public class CaseTreeTest {
 		Case testCase = dataset.get(0);
 		caseTree.addCase(testCase);
 		assertEquals(caseTree.getWholeList().size(), dataset.size() + 1);
+		caseTree.deleteCase(testCase);
+		caseTree.deleteCase(testCase);
+		assertEquals(caseTree.getWholeList().size(), dataset.size() - 1);
 	}
 }
