@@ -16,6 +16,11 @@ public class CBR_Library {
 		attributesWeights = new double[]{0.72, 0.647, 0.414, 0.608, 0.776, 0.871, 0.525, 0.983, 0.583, 0.791, 0.673, 0.742, 0.35, 1.253, 0.752, 1.243};
 	}
 	
+	public CBR_Library(List<Case> cases) {
+		this();
+		createTree(cases);
+	}
+	
 	public void createTree(List<Case> cases){
 		caseTree = new CaseTree(cases);
 		treeSize = cases.size();
