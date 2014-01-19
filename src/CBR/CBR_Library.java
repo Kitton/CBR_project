@@ -21,4 +21,16 @@ public class CBR_Library {
 	public static void deleteCase(Case inputCase){
 		cases.remove(inputCase);
 	}
+    
+    // Return the cases that are in the CBR Library
+    public List<Case> getLibraryCases()
+    {
+    	return CBR_Library.cases;
+    }
+    
+    //Return the number of cases stored in the CBR Library
+    public int getNumberCases()
+    {
+    	return this.cases.size();
+    }
 }
