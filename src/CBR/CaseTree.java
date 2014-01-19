@@ -7,7 +7,7 @@ public class CaseTree {
 	private int[] attrRating;
 	private Node rootNode;
 	
-	public CaseTree() {
+	public CaseTree(List<Case> trainingSet) {
 		attrRating = new int[16];
 		for (int i=0; i < 16; i++){
 			attrRating[i] = i;
@@ -15,18 +15,24 @@ public class CaseTree {
 		
 		rootNode = new Node(null, null, -1, -1, -1);
 		buildSubTree(0, rootNode);
-	}
-	
-	public void createTree(List<Case> trainingSet) {	
-		for (Case currentCase : trainingSet){
-			Node currentNode = searchLeaf(currentCase);
-			currentNode.getCases().add(currentCase);
-		}
+		createTree(trainingSet);
 	}
 	
 	public List<Case> getSimilarCases(Case searchCase){
+		System.out.println("Getting similar cases...");
 		Node currentNode = searchLeaf(searchCase);
+		System.out.println("Getting similar cases finished");
 		return currentNode.getCases();
+	}
+	
+	private void createTree(List<Case> trainingSet) {	
+		System.out.println("Creating caseTree...");
+		for (Case currentCase : trainingSet){
+			Node currentNode = searchLeaf(currentCase);
+			currentNode.getCases().add(currentCase);
+//			System.out.println(currentNode.getCases().size());
+		}
+		System.out.println("Creating caseTree finished");
 	}
 	
 	private Node searchLeaf(Case currentCase){
@@ -86,7 +92,7 @@ public class CaseTree {
         	cases = null;
         }
         
-        public Node(List<Case> cases, Node parent, int splittingAttr, int maxValue, int minValue) {
+        public Node(List<Case> cases, Node parent, int splittingAttr, int minValue, int maxValue) {
         	this.cases = cases;
         	this.parent = parent;
         	this.splittingAttr = splittingAttr;

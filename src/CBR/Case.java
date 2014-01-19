@@ -6,19 +6,14 @@ public class Case {
 	private List<Integer> attributes;
 	private int classLabel;
 	private int predictedClassLabel;
-	public int getPredictedClassLabel() {
-		return predictedClassLabel;
-	}
-
-	public void setPredictedClassLabel(int predictedClassLabel) {
-		this.predictedClassLabel = predictedClassLabel;
-	}
-	
 	private boolean isCorrect;
-	
+
 	public Case(List<Integer> attributes) {
 		this.attributes = attributes;
 	}
+	
+	public int getPredictedClassLabel() {return predictedClassLabel;}
+	public void setPredictedClassLabel(int predictedClassLabel) {this.predictedClassLabel = predictedClassLabel;}
 	
 	public Case(List<Integer> attributes, int classLabel, boolean isCorrect) {
 		this.attributes = attributes;
