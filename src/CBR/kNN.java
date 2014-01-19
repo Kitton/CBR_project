@@ -13,13 +13,13 @@ import java.util.Vector;
 public class kNN {
 	
 	//variables
-	private  CBR_Library PastCases;	
+	private  List<Case> LibraryClosestCases;	
 	private int k;
 	
 	//Constructor
-	public kNN(int k, CBR_Library cases)
+	public kNN(List<Case> PastCases,int k)
 	{		
-		this.PastCases=cases;
+		this.LibraryClosestCases = PastCases;
 		if (k <= 0)
 			 throw new IllegalArgumentException("The parameter K must be greater than zero!");
 		this.k = k;	
@@ -30,44 +30,25 @@ public class kNN {
 	public Vector<Case> getNearestNeighbors(Case NewCase)
 	{
 		Vector<Case> neighbors = new Vector<Case>();
-		//Vector<Double> distances = new Vector<Double>();
-		List<Case> LibraryPastCases;
-		
-		LibraryPastCases = PastCases.getLibraryCases();
-		//LibraryPastCases = PastCases.retriveClosestCases(NewCase);
+		Vector<Double> distances = new Vector<Double>();
 		Vector<DistanceCase> sortingCases = new Vector<DistanceCase>();
 		
-		for (int i=0; i< LibraryPastCases.size(); i++)
+		for (int i=0; i< LibraryClosestCases.size(); i++)
 		{
-			Case instance = LibraryPastCases.get(i);
+			Case instance = LibraryClosestCases.get(i);
 			double distance = getDistance(instance,NewCase);
 			sortingCases.add(new DistanceCase(instance,distance));
-			/*for (int j = 0; j < neighbors.size(); j++) 
-			{
-                if (distances.get(j) > distance)
-                {
-                        neighbors.insertElementAt(instance, j);
-                        distances.insertElementAt(distance, j);
-                        break;
-                }
-			}
-			if (neighbors.size() < k) 
-			{
-                neighbors.add(instance);
-                distances.add(distance);
-			}
-			if (neighbors.size() > k) 
-			{
-                neighbors.remove(k);
-                distances.remove(k);
-			}*/
-		}
-		Collections.sort(sortingCases);
-
-		for (int i=0; i<k; i++){
-			neighbors.add(sortingCases.get(i).getCase());
+			
+			
 		}
 		
+		Collections.sort(sortingCases);
+		
+		for (int i=0; i<k; i++)
+		{
+            neighbors.add(sortingCases.get(i).getCase());
+		}
+
         //return the k nearest neighbors
         return neighbors;
 		
@@ -111,3 +92,4 @@ public class kNN {
 	
 
 }
+
