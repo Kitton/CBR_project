@@ -1,0 +1,57 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.InfoGainAttributeEval 
+Search:       weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+Relation:     pendigits.tes-weka.filters.unsupervised.attribute.ClassAssigner-Clast
+Instances:    3498
+Attributes:   17
+              att1
+              att2
+              att3
+              att4
+              att5
+              att6
+              att7
+              att8
+              att9
+              att10
+              att11
+              att12
+              att13
+              att14
+              att15
+              att16
+              att17
+Evaluation mode:    evaluate on all training data
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 17 att17):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 1.253  14 att14
+ 1.243  16 att16
+ 0.983   8 att8
+ 0.871   6 att6
+ 0.791  10 att10
+ 0.776   5 att5
+ 0.752  15 att15
+ 0.742  12 att12
+ 0.72    1 att1
+ 0.673  11 att11
+ 0.647   2 att2
+ 0.608   4 att4
+ 0.583   9 att9
+ 0.525   7 att7
+ 0.414   3 att3
+ 0.35   13 att13
+
+Selected attributes: 14,16,8,6,10,5,15,12,1,11,2,4,9,7,3,13 : 16
+
+
