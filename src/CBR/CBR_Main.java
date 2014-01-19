@@ -24,6 +24,7 @@ public class CBR_Main {
         	int k =3;
         	CBR_Retrieve retrieval = new CBR_Retrieve(k);
         	CBR_Reuse reuse = new CBR_Reuse();
+        	CBR_EvaluateRetain evRet = new CBR_EvaluateRetain("FullRetain",library);
        
         
         	for (int i=0; i<TestDataSize; i++)
@@ -55,13 +56,19 @@ public class CBR_Main {
         		
         		
         		//Evaluate-Retain
-        	
+        		
+        		evRet.doYourjob(NewCase);
         	
         	
         	}
+        	
+        	ArrayList<Double> accuracies = evRet.getAccuracies();
+        	ArrayList<ArrayList<Integer>> labelPairs = evRet.getLabelPairs();
         
+        	System.out.println("Accuracies = "+accuracies);
+        	System.out.println("Final accuracy = "+evRet.getAccuracy());
 		
-	
+        	System.out.println("Finished!!!!");
 
 	}
 }
