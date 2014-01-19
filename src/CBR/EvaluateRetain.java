@@ -1,6 +1,7 @@
 package CBR;
 
 import java.util.List;
+import java.util.Vector;
 
 public class EvaluateRetain {
 
@@ -8,6 +9,7 @@ public class EvaluateRetain {
 	private CBR_Library database;
 	private String policy;
 	private float simThreshold;
+	private int kSimilar;
 	
 	public EvaluateRetain(String policy, CBR_Library database) {
 		this.policy = policy;
@@ -49,22 +51,36 @@ public class EvaluateRetain {
 		
 	}
 	
+	public void setKSimilar(int k){
+		this.kSimilar=k;
+	}
+	
 	private void doRetain(Case newCase){
 		// Do retain
 		if (this.policy=="FullRetain"){
 			this.database.addCase(newCase);
 		}
 		else if (this.policy=="Similarity") {
+			// We only store good cases
 			List<Case> cases = this.database.retriveClosestCases(newCase);
-			
+			kNN nearest = new kNN(this.kSimilar,this.database);
+			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
+			// According to simThreshold, if all k cases are below it, we don't store the case
+			int count=0;
+			for (int i=0;i<this.kSimilar;i++){
+				if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
+					count++;
+				}
+			}
+			if (count<this.kSimilar){
+				this.database.addCase(newCase);
+			}
 		}
 		else if (this.policy=="NegativeCases") {
+			// Removing?? Maybe??
 			
 		}
-		else if (this.policy=="AllPolicies"){
-			
-		}
-		// Removing?? Maybe??
+		
 	}
 	
 }

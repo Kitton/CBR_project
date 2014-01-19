@@ -17,8 +17,9 @@ public class kNN {
 	private int k;
 	
 	//Constructor
-	public kNN(int k)
+	public kNN(int k, CBR_Library cases)
 	{		
+		this.PastCases=cases;
 		if (k <= 0)
 			 throw new IllegalArgumentException("The parameter K must be greater than zero!");
 		this.k = k;	
