@@ -6,6 +6,7 @@ import java.util.List;
 public class CaseTree {
 	private int[] attrRating;
 	private Node rootNode;
+	private List<Case> wholeList;
 	
 	public CaseTree(List<Case> trainingSet) {
 //		static array from InfoGain results.
@@ -14,21 +15,26 @@ public class CaseTree {
 		rootNode = new Node(null, null, -1, -1, -1);
 		buildSubTree(0, rootNode);
 		createTree(trainingSet);
+		wholeList = trainingSet;
 	}
 	
 	public List<Case> getSimilarCases(Case searchCase){
-		System.out.println("Getting similar cases...");
+//		System.out.println("Getting similar cases...");
 		Node currentNode = searchLeaf(searchCase);
-		System.out.println("Getting similar cases finished");
+//		System.out.println("Getting similar cases finished");
 		return currentNode.getCases();
 	}
 	
 	public void addCase(Case newCase) {
 		getSimilarCases(newCase).add(newCase);
+		wholeList.add(newCase);
 	}
+	
+	public List<Case> getWholeList() { return this.wholeList; }
 	
 	public void deleteCase(Case deletedCase){
 		getSimilarCases(deletedCase).remove(deletedCase);
+		wholeList.remove(deletedCase);
 	}
 	
 	private void createTree(List<Case> trainingSet) {	
@@ -36,7 +42,7 @@ public class CaseTree {
 		for (Case currentCase : trainingSet){
 			Node currentNode = searchLeaf(currentCase);
 			currentNode.getCases().add(currentCase);
-//			System.out.println(currentNode.getCases().size());
+//			System.out.println(currentNode.getCases().size() + " : " + currentNode);
 		}
 		System.out.println("Creating caseTree finished");
 	}
@@ -74,7 +80,8 @@ public class CaseTree {
 		Node child2 = new Node(null, currentParent, attrRating[currentLevel], 51, 100);
 		currentParent.addChild(child2);
 		
-		if (currentLevel + 1 <  attrRating.length) {
+		if (currentLevel + 1 <  attrRating.length/2) {
+//		if (currentLevel + 1 <  attrRating.length) {
 			buildSubTree(currentLevel + 1, child1);
 			buildSubTree(currentLevel + 1, child2);
 		}

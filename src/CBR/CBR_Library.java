@@ -21,6 +21,10 @@ public class CBR_Library {
 		createTree(cases);
 	}
 	
+	public List<Case> getWholeList() {
+		return caseTree.getWholeList();
+	}
+	
 	public void createTree(List<Case> cases){
 		caseTree = new CaseTree(cases);
 		treeSize = cases.size();
