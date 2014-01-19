@@ -36,7 +36,7 @@ public class CBR_Main_Oscar {
         
         	CBR_Retrieve retrieval = new CBR_Retrieve(k,DistanceMeasure,Attributesweights);
         	CBR_Reuse reuse = new CBR_Reuse();
-        	CBR_EvaluateRetain evRet = new CBR_EvaluateRetain("FullRetain",library);
+        	CBR_EvaluateRetain evRet = new CBR_EvaluateRetain("FullRetain",library,Attributesweights);
        
         
         
@@ -60,11 +60,7 @@ public class CBR_Main_Oscar {
         		classPredicted = reuse.getNewCaseClassLabel(NearestNeighbors, NewCase);
         	
         		NewCase.setPredictedClassLabel(classPredicted);
-        	
-        	
-        	
-        	
-        	
+        
         		//Evaluate-Retain
         		
         		evRet.doYourjob(NewCase);

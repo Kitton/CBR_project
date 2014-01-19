@@ -19,8 +19,10 @@ public class CBR_EvaluateRetain {
 	private ArrayList<ArrayList<Integer>> labelPairs;
 	private ArrayList<Double> f1s;
 	private ArrayList<Double> sensitivities;
+	private double []Attributesweights;
 	
-	public CBR_EvaluateRetain(String policy, CBR_Library database) {
+	public CBR_EvaluateRetain(String policy, CBR_Library database,double []Attributesweights) {
+		this.Attributesweights = Attributesweights;
 		this.policy = policy;
 		this.database = database;
 		this.accuracies = new ArrayList<Double>();
@@ -37,7 +39,7 @@ public class CBR_EvaluateRetain {
 		// Evaluate
 		evaluatedCase = doEv(newCase);
 		//Store the evaluation result
-		System.out.printf("evaluatedCase = %d\n",evaluatedCase);
+		//System.out.printf("evaluatedCase = %d\n",evaluatedCase);
 		if (evaluatedCase>-1){
 			this.trueP.add(evaluatedCase);
 			this.accuracies.add(this.calcAccuracy());
@@ -125,13 +127,13 @@ public class CBR_EvaluateRetain {
 			// We only store good cases
 			List<Case> cases = this.database.getWholeList();
 			kNN nearest = new kNN( cases, this.kSimilar );
-			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
+			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase,"Euclidean Distance",Attributesweights);
 			
 			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
 				// According to simThreshold, if all k cases are below it, we don't store the case
 				int count=0;
 				for (int i=0;i<this.kSimilar;i++){
-					if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
+					if (nearest.getDistanceEuclidean(nearCases.get(i),newCase)<this.simThreshold){
 						count++;
 					}
 				}
@@ -144,13 +146,13 @@ public class CBR_EvaluateRetain {
 			// Removing?? Maybe??
 			List<Case> cases = this.database.getWholeList();
 			kNN nearest = new kNN(cases, this.kSimilar);
-			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
+			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase,"Euclidean Distance",Attributesweights);
 			
 			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
 				// According to simThreshold, if all k cases are below it, we don't store the case
 				int count=0;
 				for (int i=0;i<this.kSimilar;i++){
-					if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
+					if (nearest.getDistanceEuclidean(nearCases.get(i),newCase)<this.simThreshold){
 						count++;
 					}
 				}
@@ -163,7 +165,7 @@ public class CBR_EvaluateRetain {
 				// We don't store the negative case
 				
 				for (int i=0;i<this.kSimilar;i++){
-					if (nearest.getDistance(nearCases.get(i),newCase)<this.simRemvThres	){
+					if (nearest.getDistanceEuclidean(nearCases.get(i),newCase)<this.simRemvThres	){
 						this.database.deleteCase(nearCases.get(i)); 
 					}
 				}
