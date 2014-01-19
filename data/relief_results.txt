@@ -1,0 +1,60 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.ReliefFAttributeEval -M -1 -D 1 -K 10
+Search:       weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+Relation:     pendigits.tes-weka.filters.unsupervised.attribute.ClassAssigner-Clast
+Instances:    3498
+Attributes:   17
+              att1
+              att2
+              att3
+              att4
+              att5
+              att6
+              att7
+              att8
+              att9
+              att10
+              att11
+              att12
+              att13
+              att14
+              att15
+              att16
+              att17
+Evaluation mode:    evaluate on all training data
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 17 att17):
+	ReliefF Ranking Filter
+	Instances sampled: all
+	Number of nearest neighbours (k): 10
+	Equal influence nearest neighbours
+
+Ranked attributes:
+ 0.2798  15 att15
+ 0.2742  16 att16
+ 0.2502  11 att11
+ 0.2426   1 att1
+ 0.2405  14 att14
+ 0.2109   5 att5
+ 0.1974   8 att8
+ 0.1897   9 att9
+ 0.188    7 att7
+ 0.1853  10 att10
+ 0.1654  12 att12
+ 0.1633   6 att6
+ 0.1316  13 att13
+ 0.1305   3 att3
+ 0.1001   4 att4
+ 0.088    2 att2
+
+Selected attributes: 15,16,11,1,14,5,8,9,7,10,12,6,13,3,4,2 : 16
+
+
