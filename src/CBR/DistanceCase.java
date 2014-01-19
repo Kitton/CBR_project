@@ -16,8 +16,8 @@ public class DistanceCase implements Comparable<DistanceCase> {
 	
 	@Override
 	public int compareTo(DistanceCase a) {
-	       //return either 1, 0, or -1
-	       //that you compare between this object and object a
+	     //return either 1, 0, or -1
+	     //that you compare between this object and object a
 		 int out=0;
 		 
 		 if (this.distance < a.distance){
@@ -28,7 +28,7 @@ public class DistanceCase implements Comparable<DistanceCase> {
 		 }
 		 
 		 return out;
-	 }
+	}
 	
 	@Override
 	public String toString() { 
