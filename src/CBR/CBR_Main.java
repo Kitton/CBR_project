@@ -9,8 +9,11 @@ import java.util.List;
 
 public class CBR_Main {
 	public static void main(String[] args) throws IOException {
-		List<Case> trainingData = DataReader.readData("./data/pendigits_100.tes");
-		System.out.println(trainingData.size() + " cases were read");
+		List<Case> trainingData = DataReader.readData("./data/pendigits.tra");
+		System.out.println(trainingData.size() + " training cases were read");
 		CBR_Library library = new CBR_Library(trainingData);
+		
+		List<Case> testData = DataReader.readData("./data/pendigits.tes");
+		System.out.println(testData.size() + " test cases were read");
 	}
 }
