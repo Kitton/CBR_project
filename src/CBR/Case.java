@@ -5,6 +5,15 @@ import java.util.List;
 public class Case { 
 	private List<Integer> attributes;
 	private int classLabel;
+	private int predictedClassLabel;
+	public int getPredictedClassLabel() {
+		return predictedClassLabel;
+	}
+
+	public void setPredictedClassLabel(int predictedClassLabel) {
+		this.predictedClassLabel = predictedClassLabel;
+	}
+	
 	private boolean isCorrect;
 	
 	public Case(List<Integer> attributes) {
@@ -15,6 +24,7 @@ public class Case {
 		this.attributes = attributes;
 		this.classLabel = classLabel;
 		this.isCorrect = isCorrect;
+		this.predictedClassLabel = -1;
 	}
 	
 	public void setClassLabel(int value){
