@@ -41,4 +41,13 @@ public class CaseTreeTest {
 		int newSize = caseTree.getSimilarCases(testCase).size();
 		assertEquals(oldSize == (newSize + 1), true);
 	}
+	
+	@Test
+	public void testGetWholeList() throws IOException{
+		List<Case> dataset = DataReader.readData("./data/pendigits.tra");
+		CaseTree caseTree = new CaseTree(dataset);
+		Case testCase = dataset.get(0);
+		caseTree.addCase(testCase);
+		assertEquals(caseTree.getWholeList().size(), dataset.size() + 1);
+	}
 }
