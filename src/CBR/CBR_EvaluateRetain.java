@@ -23,6 +23,11 @@ public class CBR_EvaluateRetain {
 	public CBR_EvaluateRetain(String policy, CBR_Library database) {
 		this.policy = policy;
 		this.database = database;
+		this.accuracies = new ArrayList<Double>();
+		this.f1s = new ArrayList<Double>();
+		this.labelPairs = new ArrayList<ArrayList<Integer>>();
+		this.sensitivities = new ArrayList<Double>();
+		this.trueP = new ArrayList<Integer>();
 	}
 	
 	public void doYourjob(Case newCase){
@@ -32,6 +37,7 @@ public class CBR_EvaluateRetain {
 		// Evaluate
 		evaluatedCase = doEv(newCase);
 		//Store the evaluation result
+		System.out.printf("evaluatedCase = %d\n",evaluatedCase);
 		if (evaluatedCase>-1){
 			this.trueP.add(evaluatedCase);
 			this.accuracies.add(this.calcAccuracy());
@@ -55,7 +61,7 @@ public class CBR_EvaluateRetain {
 	         sum = sum + i;
 		}
 		
-		return sum/this.trueP.size();
+		return (double)sum/(double)this.trueP.size();
 		
 	}
 	
@@ -84,6 +90,7 @@ public class CBR_EvaluateRetain {
 			// We show the interface for the expert
 			// Case not evaluated, not expert interface yet
 			out=-1;
+			System.out.println("The known label is -1!!!");
 		}
 		else if(newCase.getClassLabel()==newCase.getPredictedClassLabel()){
 			out=1;
@@ -116,7 +123,7 @@ public class CBR_EvaluateRetain {
 		}
 		else if (this.policy=="Similarity") {
 			// We only store good cases
-			List<Case> cases = this.database.retriveClosestCases(newCase);
+			List<Case> cases = this.database.getWholeList();
 			kNN nearest = new kNN( cases, this.kSimilar );
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			
@@ -135,7 +142,7 @@ public class CBR_EvaluateRetain {
 		}
 		else if (this.policy=="NegativeCases") {
 			// Removing?? Maybe??
-			List<Case> cases = this.database.retriveClosestCases(newCase);
+			List<Case> cases = this.database.getWholeList();
 			kNN nearest = new kNN(cases, this.kSimilar);
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			

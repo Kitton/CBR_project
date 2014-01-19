@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CBR_Main {
+public class CBR_Main_Oscar {
 	public static void main(String[] args) throws IOException 
 	{
 		List<Case> trainingData = DataReader.readData("./data/pendigits.tra");		
@@ -36,6 +36,7 @@ public class CBR_Main {
         
         	CBR_Retrieve retrieval = new CBR_Retrieve(k,DistanceMeasure,Attributesweights);
         	CBR_Reuse reuse = new CBR_Reuse();
+        	CBR_EvaluateRetain evRet = new CBR_EvaluateRetain("FullRetain",library);
        
         
         
@@ -65,12 +66,21 @@ public class CBR_Main {
         	
         	
         		//Evaluate-Retain
-        	
+        		
+        		evRet.doYourjob(NewCase);
         	
         	
         	}
+
+        	
+        	ArrayList<Double> accuracies = evRet.getAccuracies();
+        	ArrayList<ArrayList<Integer>> labelPairs = evRet.getLabelPairs();
+        
+        	System.out.println("Accuracies = "+accuracies);
+        	System.out.println("Final accuracy = "+evRet.getAccuracy());
+
 		
-	
+        	System.out.println("Finished!!!!");
 
 	}
 }
