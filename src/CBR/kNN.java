@@ -27,26 +27,59 @@ public class kNN {
 	
 	
 	//Get Nearest Neighbors
-	public Vector<Case> getNearestNeighbors(Case NewCase)
+	public Vector<Case> getNearestNeighbors(Case NewCase, String type, double []Attributesweights)
 	{
 		Vector<Case> neighbors = new Vector<Case>();
 		Vector<Double> distances = new Vector<Double>();
 		Vector<DistanceCase> sortingCases = new Vector<DistanceCase>();
 		
-		for (int i=0; i< LibraryClosestCases.size(); i++)
+		
+		if (type=="Euclidean Distance")
 		{
-			Case instance = LibraryClosestCases.get(i);
-			double distance = getDistance(instance,NewCase);
-			sortingCases.add(new DistanceCase(instance,distance));
 			
+			for (int i=0; i< LibraryClosestCases.size(); i++)
+			{
+				Case instance = LibraryClosestCases.get(i);
+				double distance = getDistanceEuclidean(instance,NewCase);
+				sortingCases.add(new DistanceCase(instance,distance));		
+			}
+		}
+		
+		else if (type=="Manhattan Distance")
+		{
+			for (int i=0; i< LibraryClosestCases.size(); i++)
+			{
+				Case instance = LibraryClosestCases.get(i);
+				double distance = getDistanceManhattan(instance,NewCase);
+				sortingCases.add(new DistanceCase(instance,distance));		
+			}
+		}
+		else if (type=="Euclidean Distance with attribute weights")
+		{
 			
+			for (int i=0; i< LibraryClosestCases.size(); i++)
+			{
+				Case instance = LibraryClosestCases.get(i);
+				double distance = getDistanceEuclideanW(instance,NewCase,Attributesweights);
+				sortingCases.add(new DistanceCase(instance,distance));		
+			}
+		}
+		
+		else if (type=="Manhattan Distance with attribute weights")
+		{
+			for (int i=0; i< LibraryClosestCases.size(); i++)
+			{
+				Case instance = LibraryClosestCases.get(i);
+				double distance = getDistanceManhattanW(instance,NewCase,Attributesweights);
+				sortingCases.add(new DistanceCase(instance,distance));		
+			}
 		}
 		
 		Collections.sort(sortingCases);
 		
 		for (int i=0; i<k; i++)
 		{
-            		neighbors.add(sortingCases.get(i).getCase());
+            neighbors.add(sortingCases.get(i).getCase());
 		}
 
         //return the k nearest neighbors
@@ -66,21 +99,77 @@ public class kNN {
      *            another case
      * @return the Euclidean Distance between the two
      */
-	public double getDistance(Case a, Case b)
+	public double getDistanceEuclidean(Case a, Case b)
 	{
 		double distance = 0;
 		int attr_number = a.getAttributes().size();
 		
 		for (int i = 0; i < attr_number; i++) 
 		{
-             		double x = a.getAttributes().get(i);
-             		double y = b.getAttributes().get(i);
-             		distance += (x - y) * (x - y);
+             double x = a.getAttributes().get(i);
+             double y = b.getAttributes().get(i);
+             distance += (x - y) * (x - y);
 		}
 		
 		return Math.sqrt(distance);
 		
 	}
+	
+	public double getDistanceManhattan(Case a, Case b)
+	{
+		double distance = 0;
+		int attr_number = a.getAttributes().size();
+		
+		for (int i = 0; i < attr_number; i++) 
+		{
+             double x = a.getAttributes().get(i);
+             double y = b.getAttributes().get(i);
+             distance += (x - y);
+		}
+		
+		return distance;
+		
+	}
+	
+	
+	public double getDistanceEuclideanW(Case a, Case b,double []Attributesweights)
+	{
+		double distance = 0;
+		int attr_number = a.getAttributes().size();
+		
+		for (int i = 0; i < attr_number; i++) 
+		{
+             double x = a.getAttributes().get(i);
+             x = x *Attributesweights[i];
+             double y = b.getAttributes().get(i);
+             y = y *Attributesweights[i];
+             distance += (x - y) * (x - y);
+		}
+		
+		return Math.sqrt(distance);
+	}
+	
+	
+	
+	public double getDistanceManhattanW(Case a, Case b,double []Attributesweights)
+	{
+		double distance = 0;
+		int attr_number = a.getAttributes().size();
+		
+		for (int i = 0; i < attr_number; i++) 
+		{
+             double x = a.getAttributes().get(i);
+             x = x *Attributesweights[i];
+             double y = b.getAttributes().get(i);
+             y = y *Attributesweights[i];
+             distance += (x - y);
+		}
+		
+		return distance;
+		
+	}
+	
+	
 	
 	//Get the parameter k
 	public int getk()
@@ -92,4 +181,3 @@ public class kNN {
 	
 
 }
-
