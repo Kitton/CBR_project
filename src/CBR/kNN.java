@@ -46,7 +46,7 @@ public class kNN {
 		
 		for (int i=0; i<k; i++)
 		{
-            neighbors.add(sortingCases.get(i).getCase());
+            		neighbors.add(sortingCases.get(i).getCase());
 		}
 
         //return the k nearest neighbors
@@ -73,9 +73,9 @@ public class kNN {
 		
 		for (int i = 0; i < attr_number; i++) 
 		{
-             double x = a.getAttributes().get(i);
-             double y = b.getAttributes().get(i);
-             distance += (x - y) * (x - y);
+             		double x = a.getAttributes().get(i);
+             		double y = b.getAttributes().get(i);
+             		distance += (x - y) * (x - y);
 		}
 		
 		return Math.sqrt(distance);
