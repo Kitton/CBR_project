@@ -25,6 +25,14 @@ public class CaseTree {
 		return currentNode.getCases();
 	}
 	
+	public void addCase(Case newCase) {
+		getSimilarCases(newCase).add(newCase);
+	}
+	
+	public void deleteCase(Case deletedCase){
+		getSimilarCases(deletedCase).remove(deletedCase);
+	}
+	
 	private void createTree(List<Case> trainingSet) {	
 		System.out.println("Creating caseTree...");
 		for (Case currentCase : trainingSet){
