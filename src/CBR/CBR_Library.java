@@ -1,36 +1,40 @@
 package CBR;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CBR_Library {
-	private static List<Case> cases;
+	private CaseTree caseTree;
+	private int treeSize;
 	
-	public static void createTree(List<Case> cases){
-		CBR_Library.cases = cases;
+	public CBR_Library(){
+		treeSize = -1;
 	}
 	
-	public static List<Case> retriveClosestCases(Case inputCase){
-		return CBR_Library.cases;
+	public void createTree(List<Case> cases){
+		caseTree = new CaseTree(cases);
+		treeSize = cases.size();
 	}
 	
-	public static void addCase(Case inputCase){
-		cases.add(inputCase);
+	public List<Case> retriveClosestCases(Case inputCase){
+		return caseTree.getSimilarCases(inputCase);
 	}
 	
-	public static void deleteCase(Case inputCase){
-		cases.remove(inputCase);
+	public void addCase(Case newCase){
+		caseTree.addCase(newCase);
+		treeSize++;
 	}
-    
-    // Return the cases that are in the CBR Library
-    public List<Case> getLibraryCases()
-    {
-    	return CBR_Library.cases;
-    }
+	
+	public void deleteCase(Case deletedCase){
+		caseTree.deleteCase(deletedCase);
+		treeSize--;
+	}
     
     //Return the number of cases stored in the CBR Library
     public int getNumberCases()
     {
-    	return this.cases.size();
+    	return treeSize;
     }
 }
