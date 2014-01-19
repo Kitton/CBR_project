@@ -26,8 +26,7 @@ public class CBR_Main {
         	/* Distance Similarity Measures:
         		"Euclidean Distance"
         		"Euclidean Distance with attribute weights"
-        		"Manhattan Distance"
-        		"Manhattan Distance with attribute weights"
+        		
         	*/        
         	//Choose one type from the above ones
         	DistanceMeasure = "Euclidean Distance";
