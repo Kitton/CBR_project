@@ -11,6 +11,9 @@ public class EvaluateRetain {
 	private double simThreshold;
 	private double simRemvThres;
 	private int kSimilar;
+	private double accuracy;
+	private double f1;
+	private double sensitivity;
 	
 	public EvaluateRetain(String policy, CBR_Library database) {
 		this.policy = policy;
@@ -68,7 +71,7 @@ public class EvaluateRetain {
 		else if (this.policy=="Similarity") {
 			// We only store good cases
 			List<Case> cases = this.database.retriveClosestCases(newCase);
-			kNN nearest = new kNN(  this.database.retriveClosestCases(newCase),this.kSimilar );
+			kNN nearest = new kNN( cases, this.kSimilar );
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			
 			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
@@ -87,7 +90,7 @@ public class EvaluateRetain {
 		else if (this.policy=="NegativeCases") {
 			// Removing?? Maybe??
 			List<Case> cases = this.database.retriveClosestCases(newCase);
-			kNN nearest = new kNN(this.kSimilar,this.database);
+			kNN nearest = new kNN(cases, this.kSimilar);
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			
 			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
@@ -115,6 +118,18 @@ public class EvaluateRetain {
 			}
 		}
 		
+	}
+
+	public double getAccuracy() {
+		return accuracy;
+	}
+
+	public double getF1() {
+		return f1;
+	}
+
+	public double getSensitivity() {
+		return sensitivity;
 	}
 	
 }
