@@ -9,7 +9,8 @@ import java.util.List;
 
 public class CBR_Main {
 	public static void main(String[] args) throws IOException {
-		int n = DataReader.readData("./data/pendigits_100.tes").size();
-		System.out.println(n + " cases were read");
+		List<Case> trainingData = DataReader.readData("./data/pendigits_100.tes");
+		System.out.println(trainingData.size() + " cases were read");
+		CBR_Library library = new CBR_Library(trainingData);
 	}
 }
