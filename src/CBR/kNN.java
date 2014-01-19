@@ -43,17 +43,7 @@ public class kNN {
 				double distance = getDistanceEuclidean(instance,NewCase);
 				sortingCases.add(new DistanceCase(instance,distance));		
 			}
-		}
-		
-		else if (type=="Manhattan Distance")
-		{
-			for (int i=0; i< LibraryClosestCases.size(); i++)
-			{
-				Case instance = LibraryClosestCases.get(i);
-				double distance = getDistanceManhattan(instance,NewCase);
-				sortingCases.add(new DistanceCase(instance,distance));		
-			}
-		}
+		}	
 		else if (type=="Euclidean Distance with attribute weights")
 		{
 			
@@ -65,15 +55,7 @@ public class kNN {
 			}
 		}
 		
-		else if (type=="Manhattan Distance with attribute weights")
-		{
-			for (int i=0; i< LibraryClosestCases.size(); i++)
-			{
-				Case instance = LibraryClosestCases.get(i);
-				double distance = getDistanceManhattanW(instance,NewCase,Attributesweights);
-				sortingCases.add(new DistanceCase(instance,distance));		
-			}
-		}
+		
 		
 		Collections.sort(sortingCases);
 		
@@ -115,21 +97,7 @@ public class kNN {
 		
 	}
 	
-	public double getDistanceManhattan(Case a, Case b)
-	{
-		double distance = 0;
-		int attr_number = a.getAttributes().size();
-		
-		for (int i = 0; i < attr_number; i++) 
-		{
-             double x = a.getAttributes().get(i);
-             double y = b.getAttributes().get(i);
-             distance += (x - y);
-		}
-		
-		return distance;
-		
-	}
+	
 	
 	
 	public double getDistanceEuclideanW(Case a, Case b,double []Attributesweights)
@@ -151,23 +119,7 @@ public class kNN {
 	
 	
 	
-	public double getDistanceManhattanW(Case a, Case b,double []Attributesweights)
-	{
-		double distance = 0;
-		int attr_number = a.getAttributes().size();
-		
-		for (int i = 0; i < attr_number; i++) 
-		{
-             double x = a.getAttributes().get(i);
-             x = x *Attributesweights[i];
-             double y = b.getAttributes().get(i);
-             y = y *Attributesweights[i];
-             distance += (x - y);
-		}
-		
-		return distance;
-		
-	}
+	
 	
 	
 	
