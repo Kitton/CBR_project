@@ -8,10 +8,8 @@ public class CaseTree {
 	private Node rootNode;
 	
 	public CaseTree(List<Case> trainingSet) {
-		attrRating = new int[16];
-		for (int i=0; i < 16; i++){
-			attrRating[i] = i;
-		}
+//		static array from InfoGain results.
+		attrRating = new int[]{13, 15, 7, 5, 9, 4, 14, 11, 0, 10, 1, 3, 8, 6, 2, 12};
 		
 		rootNode = new Node(null, null, -1, -1, -1);
 		buildSubTree(0, rootNode);
