@@ -14,7 +14,7 @@ import org.junit.Test;
 public class CaseTreeTest {
 	@Test
 	public void testGetSimilarCases() throws IOException {
-		List<Case> dataset = DataReader.readData("./data/pendigits.tes");
+		List<Case> dataset = DataReader.readData("./data/pendigits.tra");
 		CaseTree caseTree = new CaseTree(dataset);
 		System.out.println(caseTree.getSimilarCases(dataset.get(0)).size());
 		assertEquals(caseTree.getSimilarCases(dataset.get(0)).size() > 1, true);
@@ -22,7 +22,7 @@ public class CaseTreeTest {
 	
 	@Test
 	public void testAddCase() throws IOException{
-		List<Case> dataset = DataReader.readData("./data/pendigits.tes");
+		List<Case> dataset = DataReader.readData("./data/pendigits.tra");
 		CaseTree caseTree = new CaseTree(dataset);
 		Case testCase = dataset.get(0);
 		int oldSize = caseTree.getSimilarCases(testCase).size();
@@ -33,7 +33,7 @@ public class CaseTreeTest {
 	
 	@Test
 	public void testDeleteCase() throws IOException{
-		List<Case> dataset = DataReader.readData("./data/pendigits.tes");
+		List<Case> dataset = DataReader.readData("./data/pendigits.tra");
 		CaseTree caseTree = new CaseTree(dataset);
 		Case testCase = dataset.get(0);
 		int oldSize = caseTree.getSimilarCases(testCase).size();
