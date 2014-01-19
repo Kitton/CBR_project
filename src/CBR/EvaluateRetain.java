@@ -8,7 +8,8 @@ public class EvaluateRetain {
 	// The attributes for:
 	private CBR_Library database;
 	private String policy;
-	private float simThreshold;
+	private double simThreshold;
+	private double simRemvThres;
 	private int kSimilar;
 	
 	public EvaluateRetain(String policy, CBR_Library database) {
@@ -45,10 +46,14 @@ public class EvaluateRetain {
 		return newCase;
 	}
 	
-	public void setSimThreshold(float thrs){
+	public void setSimThreshold(double thrs){
 		
 		this.simThreshold = thrs;
 		
+	}
+	
+	public void setSimDelThrs(double thrs) {
+		this.simRemvThres = thrs;
 	}
 	
 	public void setKSimilar(int k){
@@ -65,20 +70,49 @@ public class EvaluateRetain {
 			List<Case> cases = this.database.retriveClosestCases(newCase);
 			kNN nearest = new kNN(this.kSimilar,this.database);
 			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
-			// According to simThreshold, if all k cases are below it, we don't store the case
-			int count=0;
-			for (int i=0;i<this.kSimilar;i++){
-				if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
-					count++;
+			
+			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
+				// According to simThreshold, if all k cases are below it, we don't store the case
+				int count=0;
+				for (int i=0;i<this.kSimilar;i++){
+					if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
+						count++;
+					}
 				}
-			}
-			if (count<this.kSimilar){
-				this.database.addCase(newCase);
+				if (count<this.kSimilar){
+					this.database.addCase(newCase);
+				}
 			}
 		}
 		else if (this.policy=="NegativeCases") {
 			// Removing?? Maybe??
+			List<Case> cases = this.database.retriveClosestCases(newCase);
+			kNN nearest = new kNN(this.kSimilar,this.database);
+			Vector<Case> nearCases = nearest.getNearestNeighbors(newCase);
 			
+			if (newCase.getPredictedClassLabel()==newCase.getClassLabel()){	
+				// According to simThreshold, if all k cases are below it, we don't store the case
+				int count=0;
+				for (int i=0;i<this.kSimilar;i++){
+					if (nearest.getDistance(nearCases.get(i),newCase)<this.simThreshold){
+						count++;
+					}
+				}
+				if (count<this.kSimilar){
+					this.database.addCase(newCase);
+				}
+			}
+			else {
+				// According to simRemvThres, if all past cases below it will be erased from library
+				// We don't store the negative case
+				
+				for (int i=0;i<this.kSimilar;i++){
+					if (nearest.getDistance(nearCases.get(i),newCase)<this.simRemvThres	){
+						this.database.deleteCase(nearCases.get(i)); 
+					}
+				}
+				
+			}
 		}
 		
 	}
