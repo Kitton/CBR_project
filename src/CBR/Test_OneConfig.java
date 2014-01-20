@@ -139,6 +139,31 @@ public class Test_OneConfig {
         }
 	}
 	
+	public void storePredictedLabels(String fileName) throws IOException{
+		int params = this.config.size();
+		BufferedWriter writer = null;
+		File logFile = null;
+		
+		logFile = new File(fileName);
+		
+		writer = new BufferedWriter(new FileWriter(logFile));
+		this.writePredictedLabels(writer);
+	}
+	
+	public void writePredictedLabels(BufferedWriter writer) throws IOException{
+		ArrayList<Integer> labels =  this.evRet.getPredictedLabels();
+        int labSize = labels.size();
+        for (int i=0; i<labSize;i++){
+			writer.write(String.valueOf(labels.get(i)));
+			if (i+1==labSize){
+				writer.write("\n");
+			}
+			else{
+				writer.write(",");
+			}
+        }
+	}
+	
 	public int getFinalNumLibCases(){
 		
 		return this.evRet.getNumCasesOnLibr();

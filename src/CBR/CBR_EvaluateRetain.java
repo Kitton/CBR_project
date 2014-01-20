@@ -186,6 +186,15 @@ public class CBR_EvaluateRetain {
 	public ArrayList<ArrayList<Integer>> getLabelPairs() {
 		return this.labelPairs;
 	}
+	public ArrayList<Integer> getPredictedLabels(){
+		// Second is the predicted
+		int size=this.labelPairs.size();
+		ArrayList<Integer> labels= new ArrayList<Integer>();
+		for (int i=0; i<size; i++) {
+			labels.add(this.labelPairs.get(i).get(1));
+		}
+		return labels;
+	}
 	public int getNumCasesOnLibr(){
 		return this.database.getNumberCases();
 	}
