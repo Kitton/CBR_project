@@ -21,5 +21,5 @@
 Executable version of the system :
 User manual document (source file):
 User manual document (pdf file):	
-Technical Manual document (source file):
-Technical Manual document (pdf file):	
+Technical Manual document (source file): Technical_manual.docx
+Technical Manual document (pdf file): Technical_manual.pdf
