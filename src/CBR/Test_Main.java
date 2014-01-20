@@ -11,7 +11,7 @@ public class Test_Main {
         List<Case> testingData = DataReader.readData("./data/pendigits.tes");
         System.out.println(testingData.size() + " Test cases ");
         
-        List<Case> unvalTrainData = DataReader.readData("./data/unvalancedTrainData.tra");	
+        List<Case> unvalTrainData = DataReader.readData("./data/unbalancedTrainData.tra");	
         
         //Test_GridSearch myTest0 = new Test_GridSearch(trainingData,testingData,0);
         // We use now less data for training inverting the datasets
