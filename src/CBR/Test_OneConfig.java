@@ -93,15 +93,15 @@ public class Test_OneConfig {
 		//ArrayList<ArrayList<Integer>> labelPairs = this.evRet.getLabelPairs();
 	
 		//System.out.println("Accuracies = "+accuracies);
-		System.out.println("Final accuracy = "+this.evRet.getAccuracy());
-		System.out.println("Storing...");
+		//System.out.println("Final accuracy = "+this.evRet.getAccuracy());
+		//System.out.println("Storing...");
 		try {
 			this.storeResults();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Finished!!!!");
+		//System.out.println("Finished!!!!");
 	}
 	
 	public double getFinalAccuracy(){
@@ -123,6 +123,7 @@ public class Test_OneConfig {
 		}
 		writer = new BufferedWriter(new FileWriter(logFile));
 		this.writeAccuracies(writer);
+		writer.close();
 	}
 	
 	private void writeAccuracies(BufferedWriter writer) throws IOException{
@@ -148,6 +149,7 @@ public class Test_OneConfig {
 		
 		writer = new BufferedWriter(new FileWriter(logFile));
 		this.writePredictedLabels(writer);
+		writer.close();
 	}
 	
 	public void writePredictedLabels(BufferedWriter writer) throws IOException{
