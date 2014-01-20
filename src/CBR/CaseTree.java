@@ -25,9 +25,9 @@ public class CaseTree {
 		wholeList = new ArrayList<Case>();
 		wholeList.addAll(trainingSet);
 		
-		System.out.println("leaves.size : " + leaves.size());
+		//System.out.println("leaves.size : " + leaves.size());
 		for (int i = 0; i < leaves.size(); i++){
-			System.out.println(i + " : " + leaves.get(i).getCases().size());
+			//System.out.println(i + " : " + leaves.get(i).getCases().size());
 		}
 	}
 	
@@ -51,13 +51,13 @@ public class CaseTree {
 	}
 	
 	private void createTree(List<Case> trainingSet) {	
-		System.out.println("Creating caseTree...");
+		//System.out.println("Creating caseTree...");
 		for (Case currentCase : trainingSet){
 			Node currentNode = searchLeaf(currentCase);
 			currentNode.getCases().add(currentCase);
 //			System.out.println(currentNode.getCases().size() + " : " + currentNode);
 		}
-		System.out.println("Creating caseTree finished");
+		//System.out.println("Creating caseTree finished");
 	}
 	
 	private Node searchLeaf(Case currentCase){

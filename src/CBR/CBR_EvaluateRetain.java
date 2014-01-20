@@ -186,5 +186,7 @@ public class CBR_EvaluateRetain {
 	public ArrayList<ArrayList<Integer>> getLabelPairs() {
 		return this.labelPairs;
 	}
-	
+	public int getNumCasesOnLibr(){
+		return this.database.getNumberCases();
+	}
 }
