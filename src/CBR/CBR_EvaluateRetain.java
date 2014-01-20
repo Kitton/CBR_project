@@ -74,25 +74,14 @@ public class CBR_EvaluateRetain {
 	private double calcSensitivity(){
 		return 0;
 	}
-	
-	// Interfaced evaluation
-	/*private int doTest(Case newCase){
-		// In here we should provide an interface for an expert to visually evaluate the case and manually introduce the label
-		Case evaluatedCase;
 		
-		// Evaluate
-			
-		return 0;
-	}*/
-	
 	private int doEv(Case newCase){
 		// Evaluate the case
 		int out;
 		if (newCase.getClassLabel()==-1){
-			// We show the interface for the expert
-			// Case not evaluated, not expert interface yet
+			// This is the place where we would call the interface for showing the problem to the expert.
 			out=-1;
-			System.out.println("The known label is -1!!!");
+			System.out.println("Case not evaluated, not expert interface implemented. The known label is -1!!!");
 		}
 		else if(newCase.getClassLabel()==newCase.getPredictedClassLabel()){
 			out=1;

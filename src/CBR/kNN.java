@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
-
 /*
  * k nearest neighbors Classifier
  * 
@@ -66,11 +65,8 @@ public class kNN {
 
         //return the k nearest neighbors
         return neighbors;
-		
-		
+			
 	}
-	
-	
 	
 	 /**
      * Caculate the Eucidean Distance between two distinct cases
@@ -97,9 +93,6 @@ public class kNN {
 		
 	}
 	
-	
-	
-	
 	public double getDistanceEuclideanW(Case a, Case b,double []Attributesweights)
 	{
 		double distance = 0;
@@ -117,19 +110,10 @@ public class kNN {
 		return Math.sqrt(distance);
 	}
 	
-	
-	
-	
-	
-	
-	
 	//Get the parameter k
 	public int getk()
 	{
 		return this.k;
 	}
 	
-	
-	
-
 }
